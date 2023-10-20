@@ -12,6 +12,7 @@ export type PlanetType = {
   created: string;
   edited: string;
   url: string;
+  [key: string]: string | string[];
 };
 
 export interface GlobalContextValue {
@@ -19,4 +20,12 @@ export interface GlobalContextValue {
   setResultsPlanet: React.Dispatch<React.SetStateAction<PlanetType[] | undefined>>;
   filterPlanet: PlanetType[] | undefined;
   setResultsFilter: React.Dispatch<React.SetStateAction<PlanetType[] | undefined>>;
+  filterArray: DefaultValueType[] | [];
+  setFilterArray: React.Dispatch<React.SetStateAction<DefaultValueType[] | []>>;
 }
+
+export type DefaultValueType = {
+  column: string;
+  comparison: 'maior que' | 'menor que' | 'igual a';
+  valueFilter: number;
+};
