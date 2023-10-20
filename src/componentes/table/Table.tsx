@@ -1,17 +1,9 @@
-import { useEffect, useState } from 'react';
-import { getPlanetsAPI } from '../../utils/api';
+import { useContext } from 'react';
 import { PlanetType } from '../../types';
+import { GlobalContext } from '../../context/GlobalContext';
 
 export function Table() {
-  const [resultsPlanet, setResultsPlanet] = useState([]);
-  useEffect(() => {
-    const set = async () => {
-      const planets = await getPlanetsAPI();
-      setResultsPlanet(planets);
-    };
-    set();
-  }, []);
-
+  const { filterPlanet } = useContext(GlobalContext);
   return (
     <table>
       <thead>
@@ -32,7 +24,7 @@ export function Table() {
         </tr>
       </thead>
       <tbody>
-        {resultsPlanet.map((planet: PlanetType) => (
+        {filterPlanet && filterPlanet.map((planet: PlanetType) => (
           <tr key={ planet.name }>
             <td>{planet.name}</td>
             <td>{planet.rotation_period}</td>

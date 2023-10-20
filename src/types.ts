@@ -8,8 +8,15 @@ export type PlanetType = {
   terrain: string;
   surface_water: string;
   population: string;
-  films: string[]; // Um array de URLs
+  films: string[];
   created: string;
   edited: string;
   url: string;
 };
+
+export interface GlobalContextValue {
+  resultsPlanet: PlanetType[] | undefined;
+  setResultsPlanet: React.Dispatch<React.SetStateAction<PlanetType[] | undefined>>;
+  filterPlanet: PlanetType[] | undefined;
+  setResultsFilter: React.Dispatch<React.SetStateAction<PlanetType[] | undefined>>;
+}
