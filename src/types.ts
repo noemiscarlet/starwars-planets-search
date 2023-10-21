@@ -22,10 +22,19 @@ export interface GlobalContextValue {
   setResultsFilter: React.Dispatch<React.SetStateAction<PlanetType[] | undefined>>;
   filterArray: DefaultValueType[] | [];
   setFilterArray: React.Dispatch<React.SetStateAction<DefaultValueType[] | []>>;
+  filterOptionsArray: string[];
+  setFilterOptionsArray: React.Dispatch<React.SetStateAction<string[]>>;
+  filterOrder: OrderType | undefined
+  setFilterOrder: React.Dispatch<React.SetStateAction<OrderType | undefined>>;
 }
 
 export type DefaultValueType = {
   column: string;
   comparison: 'maior que' | 'menor que' | 'igual a';
   valueFilter: number;
+};
+
+export type OrderType = {
+  column: string
+  sort: string
 };

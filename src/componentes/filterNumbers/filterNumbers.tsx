@@ -1,6 +1,7 @@
 import React, { ChangeEvent, useContext, useState } from 'react';
 import { DefaultValueType } from '../../types';
 import { GlobalContext } from '../../context/GlobalContext';
+import { OrderFilter } from '../../subcomponentes/OrderFilter';
 
 const DEFAULT_VALUE: DefaultValueType = {
   column: 'population',
@@ -9,7 +10,7 @@ const DEFAULT_VALUE: DefaultValueType = {
 };
 
 export function FilterNumber() {
-  const { setFilterArray, filterArray } = useContext(GlobalContext);
+  const { setFilterArray, filterOptionsArray } = useContext(GlobalContext);
   const [filterNumeric, setFilterNumeric] = useState<DefaultValueType>(DEFAULT_VALUE);
 
   const handleChange = (event:ChangeEvent<HTMLSelectElement | HTMLInputElement>) => {
@@ -29,6 +30,10 @@ export function FilterNumber() {
     setFilterNumeric(DEFAULT_VALUE);
   };
 
+  const deleteAllFilters = () => {
+    setFilterArray([]);
+  };
+
   return (
     <div>
       <select
@@ -37,11 +42,11 @@ export function FilterNumber() {
         onChange={ handleChange }
         value={ filterNumeric.column }
       >
-        <option value="population">population</option>
-        <option value="orbital_period">orbital_period</option>
-        <option value="diameter">diameter</option>
-        <option value="rotation_period">rotation_period</option>
-        <option value="surface_water">surface_water</option>
+        {
+          filterOptionsArray.map((option) => (
+            <option key={ option } value={ option }>{option}</option>
+          ))
+        }
       </select>
       <select
         name="comparison"
@@ -61,6 +66,13 @@ export function FilterNumber() {
         value={ filterNumeric.valueFilter }
       />
       <button onClick={ handleClick } data-testid="button-filter">Filtrar</button>
+      <OrderFilter />
+      <button
+        onClick={ deleteAllFilters }
+        data-testid="button-remove-filters"
+      >
+        Remover todas filtragens
+      </button>
     </div>
   );
 }
